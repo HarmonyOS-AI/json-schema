@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://droidrun.ai/schemas/test-suite.json",
+  "$id": "https://raw.githubusercontent.com/HarmonyOS-AI/json-schema/main/droidrun/test_suite.schema.json",
   "title": "DroidRun test suite",
   "type": "object",
   "required": ["suite", "test_cases"],

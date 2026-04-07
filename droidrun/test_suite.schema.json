@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://droidrun.ai/schemas/test-suite.json",
+  "title": "DroidRun test suite",
+  "type": "object",
+  "required": ["suite", "test_cases"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Optional: path or URI of this schema for editor validation"
+    },
+    "suite": {
+      "type": "object",
+      "required": ["id", "name", "app_package"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "name": { "type": "string", "minLength": 1 },
+        "app_package": { "type": "string", "minLength": 1 },
+        "app_card": {
+          "type": "string",
+          "description": "Suite-level app guidance (same resolution as config app_cards): inline markdown/text, file:./path/to/app.md (relative to this JSON) or file:///absolute/path/app.md, or a bare .md path that exists. Rendered into Manager/Executor system prompts; not repeated in per-phase test goals."
+        }
+      }
+    },
+    "defaults": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "config_overrides": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      }
+    },
+    "test_cases": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/testCase" }
+    }
+  },
+  "$defs": {
+    "testStepObject": {
+      "type": "object",
+      "required": ["action"],
+      "additionalProperties": false,
+      "properties": {
+        "action": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Step instruction for the agent"
+        },
+        "checkpoint": {
+          "type": "string",
+          "description": "Optional verification hint after the action"
+        }
+      }
+    },
+    "testCase": {
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "level",
+        "test_steps",
+        "expected_result"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "title": { "type": "string", "minLength": 1 },
+        "level": {
+          "type": "string",
+          "enum": ["L0", "L1", "L2"],
+          "description": "L0 = highest priority; L2 = lowest of the three"
+        },
+        "preconditions": { "type": ["string", "null"] },
+        "postconditions": { "type": ["string", "null"] },
+        "test_steps": {
+          "oneOf": [
+            { "type": "string" },
+            {
+              "type": "array",
+              "items": { "type": "string" },
+              "minItems": 0
+            },
+            {
+              "type": "array",
+              "items": { "$ref": "#/$defs/testStepObject" },
+              "minItems": 1
+            }
+          ]
+        },
+        "expected_result": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

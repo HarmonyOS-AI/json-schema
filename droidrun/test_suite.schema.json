@@ -21,6 +21,10 @@
         "app_card": {
           "type": "string",
           "description": "Suite-level app guidance (same resolution as config app_cards): inline markdown/text, file:./path/to/app.md (relative to this JSON) or file:///absolute/path/app.md, or a bare .md path that exists. Rendered into Manager/Executor system prompts; not repeated in per-phase test goals."
+        },
+        "agent_prompt": {
+          "type": "string",
+          "description": "Optional suite-level agent prompt: inline text/markdown, file:./path/to/prompt.md (relative to this JSON) or file:///absolute/path/prompt.md, or a bare .md path that exists. Used to customize agent behavior for the test suite."
         }
       }
     },

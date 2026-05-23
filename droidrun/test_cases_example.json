@@ -1,0 +1,51 @@
+{
+  "$schema": "https://raw.githubusercontent.com/HarmonyOS-AI/json-schema/main/harmonyrun/test_suite.schema.json",
+  "suite": {
+    "id": "smoke_harmony_001",
+    "name": "Harmony 冒烟套件",
+    "app_package": "com.example.targetapp",
+    "app_card": "与 app_cards 类似：可直接写说明；推荐用 file:./docs/app.md（相对本 JSON）或 file:///绝对路径/app.md；仍可写裸路径指向已存在的 .md（自动当文件读入）。"
+  },
+  "defaults": {
+    "config_overrides": {
+      "steps": 20,
+      "vision": true
+    }
+  },
+  "test_cases": [
+    {
+      "id": "tc_001",
+      "title": "打开设置",
+      "level": "L0",
+      "preconditions": "设备已解锁，位于桌面。",
+      "test_steps": [
+        {
+          "action": "在桌面找到并打开「设置」应用"
+        },
+        {
+          "action": "等待设置主界面加载完成",
+          "checkpoint": "可见设置列表或分类入口"
+        }
+      ],
+      "expected_result": "设置应用已打开且可见设置主界面。",
+      "postconditions": "可返回桌面。"
+    },
+    {
+      "id": "tc_002",
+      "title": "在应用中搜索视频",
+      "level": "L1",
+      "preconditions": "设备已解锁，位于桌面。",
+      "test_steps": [
+        {
+          "action": "打开目标视频应用"
+        },
+        {
+          "action": "使用搜索功能查找指定关键词的视频",
+          "checkpoint": "搜索结果列表已展示"
+        }
+      ],
+      "expected_result": "能够播放或打开与搜索词相关的视频条目。",
+      "postconditions": "可返回上一级或桌面。"
+    }
+  ]
+}

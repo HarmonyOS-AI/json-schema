@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.githubusercontent.com/HarmonyOS-AI/json-schema/main/droidrun/test_suite.schema.json",
-  "title": "DroidRun test suite",
+  "$id": "https://raw.githubusercontent.com/HarmonyOS-AI/json-schema/main/harmonyrun/test_suite.schema.json",
+  "title": "HarmonyRun test suite",
   "type": "object",
   "required": ["suite", "test_cases"],
   "additionalProperties": false,
@@ -24,7 +24,7 @@
         },
         "agent_prompt": {
           "type": "string",
-          "description": "Optional suite-level agent prompt: inline text/markdown, file:./path/to/prompt.md (relative to this JSON) or file:///absolute/path/prompt.md, or a bare .md path that exists. Used to customize agent behavior for the test suite."
+          "description": "Suite-level supplementary instructions for the agent (e.g. validation rules, checkpoints). Supports the same file: resolution as app_card. Content is sandboxed inside the system prompt to prevent overriding core agent behaviour."
         }
       }
     },
@@ -96,7 +96,12 @@
             }
           ]
         },
-        "expected_result": { "type": "string", "minLength": 1 }
+        "expected_result": { "type": "string", "minLength": 1 },
+        "config_overrides": {
+          "type": "object",
+          "description": "Per-case config overrides. Applied on top of defaults.config_overrides for this case only.",
+          "additionalProperties": true
+        }
       }
     }
   }

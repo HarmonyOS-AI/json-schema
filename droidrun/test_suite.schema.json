@@ -76,8 +76,8 @@
         "title": { "type": "string", "minLength": 1 },
         "level": {
           "type": "string",
-          "enum": ["L0", "L1", "L2"],
-          "description": "L0 = highest priority; L2 = lowest of the three"
+          "enum": ["L0", "L1", "L2", "L3", "L4", "L5"],
+          "description": "L0 = highest priority; L5 = lowest of the six"
         },
         "preconditions": { "type": ["string", "null"] },
         "postconditions": { "type": ["string", "null"] },
